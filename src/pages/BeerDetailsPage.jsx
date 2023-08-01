@@ -9,10 +9,11 @@ function BeerDetailsPage() {
 
     const oneBeer = async () => {
         try {
-            const response = await axios.get(
-                `https://ih-beers-api2.herokuapp.com/beers/${beerId}`
-            );
-            setBeer(response.data);
+            const response = await axios.get(`https://ih-beers-api2.herokuapp.com/beers/${beerId}`);
+            if ( response.status === 200) {
+             setBeer(response.data);
+            }
+            
         } catch (error) {
             console.error(error);
         }
@@ -20,7 +21,7 @@ function BeerDetailsPage() {
 
     useEffect(() => {
         oneBeer();
-    }, []);
+    }, [beerId]);
 
     return beer ? (
         <div>
